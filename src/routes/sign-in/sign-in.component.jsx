@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import signInWithGooglePopup from '../../utils/firebase/firebase.utils'
+import { signInWithGooglePopup, createUserDocumentFromAuth } from '../../utils/firebase/firebase.utils'
 import './sign-in.styles.scss'
 
 
@@ -9,10 +9,10 @@ const SignInComponent = () => {
     const [accesstoken, setAccessToken] = useState('')
 
     const logGoogleUser = async () => {
-        const response = await signInWithGooglePopup()
-        console.log(response)
-        setName(`, ${response.user.displayName}!`)
-        // setAccessToken(`Your access token is: ${response.user.}`)
+        const { user } = await signInWithGooglePopup()
+        setName(`, ${user.displayName}!`)
+        setAccessToken(`Your unique id is: ${user.uid}`)
+        const userDocRef = await createUserDocumentFromAuth(user)
     }
 
     return (
