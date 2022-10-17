@@ -23,7 +23,7 @@ const Navigation = () => {
                     <Link to='/logout' className='nav-link'>
                         Logout 
                     </Link>
-                    <Link to='/signin' className='nav-link'>
+                    <Link to='/auth' className='nav-link'>
                         Sign in 
                     </Link>
 
