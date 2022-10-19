@@ -21,6 +21,7 @@ const SignUpForm = () => {
     const [formFields, setFormFields] = useState(defaultFormFields);
     const { displayName, email, password, confirmPassword } = formFields;
 
+
     // console.log(formFields)
 
     const handleSubmit = async (event) => {
@@ -39,6 +40,8 @@ const SignUpForm = () => {
             const { user } = await createAuthUserWithEmailAndPassword(
                 formFields
             );
+
+
             resetFormFields()
             alert(`Succesfully created! Welcome, ${displayName}`)
 
@@ -55,13 +58,13 @@ const SignUpForm = () => {
 
     // Logging with the google popUp
 
-    const logGoogleUser = async () => {
-        const { user } = await signInWithGooglePopup()
-        const { displayName, uid } = user
-        // setName(`, ${displayName}!`)
-        // setAccessToken(`Your unique id is: ${uid}`)
-        const userDocRef = await createUserDocumentFromAuth(user)
-    }
+    // const logGoogleUser = async () => {
+    //     const { user } = await signInWithGooglePopup()
+    //     const { displayName, uid } = user
+    //     // setName(`, ${displayName}!`)
+    //     // setAccessToken(`Your unique id is: ${uid}`)
+    //     const userDocRef = await createUserDocumentFromAuth(user)
+    // }
 
 
     const handleChange = (event) => {
@@ -74,7 +77,7 @@ const SignUpForm = () => {
 
     return (
         <div className='sign-up-container' >
-            <h2>I do not have an accaunt </h2>
+            <h2>I do not have an account </h2>
             <span>Sign up with your email and password</span>
             <form className='signUpFormgroup' onSubmit={(handleSubmit)}>
                 <FormInput

@@ -1,9 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.scss';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom'
+
+import App from './App';
+import { UserProvider } from './context/user.context';
+import { ProductProvider } from './context/products.context';
+import { CartProvider } from './context/cart.context';
+
+import './index.scss';
 
 
 
@@ -11,7 +16,13 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <UserProvider>      {/* Everything inside the userProvider has access to the user. */}
+        <ProductProvider> {/* Everything inside the ProductProvider has access to the Products. */}
+          <CartProvider>  {/* Everything inside the CartProvider has access to the Cart. */}
+            <App />
+          </CartProvider>
+        </ProductProvider>
+      </UserProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

@@ -1,4 +1,4 @@
-.sign-up-container {
+.sign-in-container {
     display: flex;
     flex-direction: column;
     width: 40%;
@@ -8,8 +8,9 @@
         flex-direction: row;
         justify-content: space-between;
 
-        Button {
-            width: 40%;
+        .google-sign-in{
+            font-size: 0.7rem;
         }
+        
     }
 }

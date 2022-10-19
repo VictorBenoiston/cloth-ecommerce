@@ -1,9 +1,6 @@
 import { useActionData } from 'react-router-dom'
-import { createElement, useState } from 'react'
+import { useState } from 'react'
 import {
-    signInWithGoogle,
-    createUserDocumentFromAuth,
-    signInWithGoogleRedirect,
     signInWithGooglePopup,
     signInAuthUserWithEmailAndPassword
 } from '../../utils/firebase/firebase.utils'
@@ -19,9 +16,11 @@ const defaultFormFields = {
 const SignInForm = () => {
     const [formFields, setFormFields] = useState(defaultFormFields);
     const { email, password } = formFields;
-    const [wrongPasswordMessage, setWrongPasswordMessage] = useState(3)
 
-    // console.log(formFields)
+    // Getting the setter function from the element UserContext 
+    // const { setCurrentUser } = useContext(UserContext)
+
+
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -30,14 +29,14 @@ const SignInForm = () => {
         const resetFormFields = () => {
             setFormFields(defaultFormFields)
         }
+
         try {
-            const response = await signInAuthUserWithEmailAndPassword(formFields)
+            await signInAuthUserWithEmailAndPassword(formFields)
             console.log('logged in')
-            console.log(response)
             resetFormFields()
 
         } catch (error) {
-            switch(error.code){
+            switch (error.code) {
                 case 'auth/user-not-found':
                     alert('User not found!')
                     break;
@@ -46,30 +45,38 @@ const SignInForm = () => {
                     break;
                 default:
                     console.log(error)
-                
 
 
+
+            }
         }
-    }
 
     }
 
     // Logging with the google popUp
 
     const signInWithGoogle = async () => {
-        const { user } = await signInWithGooglePopup()
+        await signInWithGooglePopup()
         // const { displayName, uid } = user
         // setName(`, ${displayName}!`)
         // setAccessToken(`Your unique id is: ${uid}`)
         try {
             await signInAuthUserWithEmailAndPassword(formFields)
             console.log('logged in')
-            console.log(user)
+
         } catch (error) {
-            if (error.code === 'auth/user-not-found') {
-                console.log('User not found')
+            switch (error.code) {
+                case 'auth/user-not-found':
+                    alert('No user associated with this email.')
+                    break;
+                case 'auth/wrong-password':
+                    alert('Wrong password for email.')
+                    break;
+                default:
+                    console.log(error)
             }
         }
+
     }
 
     const handleChange = (event) => {
@@ -82,9 +89,9 @@ const SignInForm = () => {
     }
 
     return (
-        <div className='sign-up-container' >
-            <h2>I already have an accaunt </h2>
-            <span>Sign up with your email and password</span>
+        <div className='sign-in-container'>
+            <h2>I already have an account </h2>
+            <span>Sign in with your email and password</span>
             <form className='signUpFormgroup' onSubmit={(handleSubmit)}>
                 <FormInput
                     label='E-mail'
@@ -101,7 +108,7 @@ const SignInForm = () => {
                     onChange={handleChange}
                     value={password} />  {/* The password is the value on the event.target */}
 
-                
+
                 <div className='buttons-container'>
                     <Button type='submit' buttonType='default' >Sign in</Button >
                     <Button type='button' buttonType='google-sign-in'
@@ -118,4 +125,4 @@ const SignInForm = () => {
     )
 }
 
-export default SignInForm
+export default SignInForm;

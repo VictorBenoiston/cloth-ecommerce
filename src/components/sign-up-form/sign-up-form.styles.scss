@@ -2,14 +2,11 @@
     display: flex;
     flex-direction: column;
     width: 40%;
+    
 
     .buttons-container {
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
 
-        Button {
-            width: max-content;
-        }
     }
 }
