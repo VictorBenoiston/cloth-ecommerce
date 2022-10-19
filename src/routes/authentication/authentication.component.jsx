@@ -9,9 +9,6 @@ import SignInForm from '../../components/sign-in-form/sign-in-form.component'
 
 const Authentication = () => {
 
-    const [name, setName] = useState('')
-    const [accesstoken, setAccessToken] = useState('')
-
     // Using the redirect, we need to use a useEffect, to every time we login again, we trigger the function.
     // useEffect(() => {
     //     const asFn = async () => { // We need to create a function, bc the useEffect cant be async.

@@ -5,7 +5,9 @@ import {
     signInWithPopup,   // sign in with google pop up
     GoogleAuthProvider,    // google provider 
     createUserWithEmailAndPassword,   // Creates the user with email and pass
-    signInWithEmailAndPassword     // sign in the user with email and pass
+    signInWithEmailAndPassword,     // sign in the user with email and pass
+    signOut, 
+    onAuthStateChanged
 } from 'firebase/auth'
 import {
     getFirestore,
@@ -34,7 +36,7 @@ googleProvider.setCustomParameters({
     prompt: "select_account"
 })
 
-// You only need one auth.
+// You only need one auth. It keeps track of what user is logged in.
 export const auth = getAuth();
 
 // Using the google sigIn pop up
@@ -74,6 +76,8 @@ export const createUserDocumentFromAuth = async (userAuth, additionalInformation
     return userDocRef;
 }
 
+
+// Creating an user with email and pass
 export const createAuthUserWithEmailAndPassword = async (formFields) => {
     const {email, password, displayName} = formFields
     if (!email || !password) return;
@@ -82,9 +86,23 @@ export const createAuthUserWithEmailAndPassword = async (formFields) => {
 
 }
 
+// Logging an user with email and pass
 export const signInAuthUserWithEmailAndPassword = async (formFields) => {
     const {email, password} = formFields
     if (!email || !password) return;
     return signInWithEmailAndPassword(auth, email, password)
-
 }
+
+export const signOutUser = async () => await signOut(auth)
+
+
+// Open listener. Once it renders, its always opened to percieve changes.
+// Once its called, it subscribes to a stream.
+export const onAuthStateChangedListener = (callback) => 
+    onAuthStateChanged(auth, callback, );
+
+/*
+next: callback,
+error: errorCallback,
+complete: completedCallback
+*/

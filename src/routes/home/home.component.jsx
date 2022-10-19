@@ -1,4 +1,5 @@
-import categoriesjson from '../../components/category-menu/categoryMenu' 
+// import categoriesjson from '../../components/category-menu/categoryMenu' 
+import categoriesjson from '../../categories.json'
 import DirectoryComponent from "../../components/directory/DirectoryComponent";
 
 const Home = () => {

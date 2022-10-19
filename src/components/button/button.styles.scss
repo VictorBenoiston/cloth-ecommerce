@@ -9,7 +9,9 @@
   background-color: black;
   color: white;
   text-transform: uppercase;
-  font-family: 'Open Sans Condensed';
+  // font-family: 'Open Sans Condensed';
+  font-family: 'Open Sans', sans-serif;
+
   font-weight: bolder;
   border: none;
   cursor: pointer;
@@ -26,6 +28,7 @@
     background-color: #4285f4;
     color: white;
     align-items: center;
+    padding: 0 10px 0 20px;
 
     img {
       margin: 0px 10px 0px -15px;

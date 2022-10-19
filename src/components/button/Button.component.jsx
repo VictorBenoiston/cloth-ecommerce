@@ -6,10 +6,8 @@ google-sign-in, default and inverted. */
 
 const Button = ({ children, buttonType, ...otherProps }) => {
     return (
-        <div>
             <button className={`button-container ${buttonType}`}
                 {...otherProps}>{children}</button>
-        </div>
     )
 }
 
