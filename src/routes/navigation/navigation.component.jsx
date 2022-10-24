@@ -38,9 +38,6 @@ const Navigation = () => {
                     <Link className='nav-link' to='/shop'>
                         Shop
                     </Link>
-                    <Link to='/cart' className='nav-link'>
-                        Cart
-                    </Link>
                     <Link to='/checkout' className='nav-link'>
                         Checkout
                     </Link>
@@ -55,6 +52,11 @@ const Navigation = () => {
                     <CartIcon className='nav-link' />
 
                 </div>
+                
+                
+                {/* {isCartOpen? <CartDropdown/>
+                : null} */}
+
                 {isCartOpen && <CartDropdown/>} {/* True && True. If both are true, its going to return
                                                     the last parameter (CartDropdown)  */}
             </div>
