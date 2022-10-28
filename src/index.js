@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router-dom'
 
 import App from './App';
 import { UserProvider } from './context/user.context';
-import { ProductProvider } from './context/products.context';
+import { CategoriesProvider } from './context/categories.context';
 import { CartProvider } from './context/cart.context';
 
 import './index.scss';
@@ -17,11 +17,11 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <UserProvider>      {/* Everything inside the userProvider has access to the user. */}
-        <ProductProvider> {/* Everything inside the ProductProvider has access to the Products. */}
+        <CategoriesProvider> {/* Everything inside the ProductProvider has access to the Products. */}
           <CartProvider>  {/* Everything inside the CartProvider has access to the Cart. */}
             <App />
           </CartProvider>
-        </ProductProvider>
+        </CategoriesProvider>
       </UserProvider>
     </BrowserRouter>
   </React.StrictMode>
