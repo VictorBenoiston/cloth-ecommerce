@@ -1,6 +1,6 @@
 # Clothe e-commerce
 <p> Hosted at -> 
-<a haref='https://spiffy-croissant-1a7315.netlify.app/'>Link</a>
+<a haref='https://spiffy-croissant-1a7315.netlify.app/'>Link<a>
 
 ## Technologies envolved in this project:
 [![My Skills](https://skillicons.dev/icons?i=js,html,css,react,styledcomponents)](https://skillicons.dev)
