@@ -1,5 +1,4 @@
 import { Outlet, Link } from 'react-router-dom'
-import './navigation.styles.scss'
 import { ReactComponent as CrwnLogo } from '../../assets/crown.svg'
 import { useContext } from 'react'
 import { UserContext } from '../../context/user.context'
@@ -7,6 +6,8 @@ import { CartContext } from '../../context/cart.context'
 import { signOutUser } from '../../utils/firebase/firebase.utils'
 import CartIcon from '../../components/cart-icon/cart-icon.component'
 import CartDropdown from '../../components/cart-dropdown/cart-dropdown.component'
+
+import { NavigationContainer, NavLinks, NavLink, LogoContainer } from  './navigation.styles.jsx'
 
 
 const Navigation = () => {
@@ -30,28 +31,28 @@ const Navigation = () => {
 
     return (
         <>
-            <div className='navigation'>
-                <Link className='logo-container' to='/'>
+            <NavigationContainer>
+                <LogoContainer to='/'>
                     <CrwnLogo className='logo' />
-                </Link>
-                <div className='nav-links-container'>
-                    <Link className='nav-link' to='/shop'>
+                </LogoContainer>
+                <NavLinks>
+                    <NavLink to='/shop'>
                         Shop
-                    </Link>
-                    <Link to='/checkout' className='nav-link'>
+                    </NavLink>
+                    <NavLink to='/checkout'>
                         Checkout
-                    </Link>
+                    </NavLink>
 
                     {
                         currentUser ? (
-                            <span className='nav-link' onClick={signOutUser}>Sign Out</span>)
-                            : (<Link to='/auth' className='nav-link'>
+                            <NavLink as='span' onClick={signOutUser}>Sign Out</NavLink>)
+                            : (<NavLink to='/auth' >
                                 Sign in
-                            </Link>)
+                            </NavLink>)
                     }
                     <CartIcon className='nav-link' />
 
-                </div>
+                </NavLinks>
                 
                 
                 {/* {isCartOpen? <CartDropdown/>
@@ -59,7 +60,7 @@ const Navigation = () => {
 
                 {isCartOpen && <CartDropdown/>} {/* True && True. If both are true, its going to return
                                                     the last parameter (CartDropdown)  */}
-            </div>
+            </NavigationContainer>
 
             <Outlet />
         </>

@@ -13,7 +13,11 @@ import {
     getFirestore,
     doc,
     getDoc,
-    setDoc
+    setDoc,
+    collection,
+    writeBatch,
+    query,
+    getDocs
 } from 'firebase/firestore'
 import { Form } from "react-router-dom";
 
@@ -47,6 +51,43 @@ export const signInWithGoogleRedirect = () => signInWithRedirect(auth, googlePro
 
 
 export const db = getFirestore();
+
+
+export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
+    // We have the 1st param as the key, and the 2nd as the db (--> SETTER)
+    const collectionRef = collection(db, collectionKey);
+    const batch =  writeBatch(db);
+
+    // Here we have the objects to add. In this case, the category.
+    // Inside it, we have all the documents (other objects)
+    objectsToAdd.forEach((object) => {
+        // For each object, is created a key (2nd param), based on a db (1st param)
+        const docRef = doc(collectionRef, object.title.toLowerCase());
+        batch.set(docRef, object);
+    });
+
+    // Start batching.
+    await batch.commit();
+    console.log('done')
+};
+
+
+export const getCategoriesAndDocuments = async () => {
+    // 1st param: db, 2nd param: the key title. (--> GETTER)
+    const collectionRef = collection(db, 'categories');
+    const q = query(collectionRef);
+
+    const querySnapshot = await getDocs(q);
+    const categoryMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
+        // Here, we go through each document in the 'categories' object.
+        const { title, items } = docSnapshot.data();
+        acc[title.toLowerCase()] = items;
+        // Updating the accumulator for each case = items itself.
+        return acc;
+    }, {});
+
+    return categoryMap;
+}
 
 
 //Checking weather there is a user ('user') or not. If false, create a new one.

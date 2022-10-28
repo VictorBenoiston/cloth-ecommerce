@@ -1,11 +1,11 @@
-import { useActionData } from 'react-router-dom'
+// import { useActionData } from 'react-router-dom'
 import { useState } from 'react'
 import {
     signInWithGooglePopup,
     signInAuthUserWithEmailAndPassword
 } from '../../utils/firebase/firebase.utils'
 import FormInput from '../form-input/form-input.component'
-import Button from '../button/Button.component'
+import Button, {BUTTON_TYPE_CLASSES} from '../button/Button.component'
 import './sign-in-form.styles.scss'
 
 const defaultFormFields = {
@@ -108,18 +108,14 @@ const SignInForm = () => {
                     onChange={handleChange}
                     value={password} />  {/* The password is the value on the event.target */}
 
-
                 <div className='buttons-container'>
-
-                    <Button type='submit' buttonType='default' >Sign in</Button >
-                    <Button type='button' buttonType='google-sign-in'
+                    <Button type='submit'>Sign in</Button >
+                    <Button buttonType={BUTTON_TYPE_CLASSES.google} type='button' 
                         onClick={signInWithGoogle}>
                         <img src="https://www.pngall.com/wp-content/uploads/5/Google-G-Logo.png" alt="" />
                         Sign in with Google
                     </Button>
                 </div>
-
-
             </form>
         </div>
 

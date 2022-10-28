@@ -7,7 +7,7 @@ import {
     signInWithGooglePopup
 } from '../../utils/firebase/firebase.utils'
 import FormInput from '../form-input/form-input.component'
-import Button from '../button/Button.component'
+import Button, {BUTTON_TYPE_CLASSES} from '../button/Button.component'
 import './sign-up-form.styles.scss'
 
 const defaultFormFields = {
@@ -111,7 +111,7 @@ const SignUpForm = () => {
                     value={confirmPassword}
                 />
                 <div className='buttons-container'>
-                    <Button type='submit' buttonType='default'>Sign up</Button >
+                    <Button type='submit'>Sign up</Button >
                 </div>
 
             </form>
