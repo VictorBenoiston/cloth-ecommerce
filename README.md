@@ -5,8 +5,16 @@
 ## Technologies envolved in this project:
 [![My Skills](https://skillicons.dev/icons?i=js,html,css,react,styledcomponents)](https://skillicons.dev)
 
-# Developed skills: 
-<p> In this project, i had the chance to expand my front-end knowledge. Now, i am able to use and understand ReactJS hooks, functional react components, async programmin, firebase auth and firebase storage, scss, apis, styled components, and more.
+## Developed skills: 
+### In this project, i had the chance to expand my front-end knowledge. Now, i am able to use and understand:
+
+### * ReactJS hooks; 
+### - functional react components; 
+### -> async programmin;
+### -> firebase auth and firebase storage;
+### -> scss;
+### -> rest apis;
+### -> styled components, and more.
 
 # Getting Started with Create React App
 
