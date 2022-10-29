@@ -1,20 +1,26 @@
 # Clothe e-commerce
-<p> Hosted at -> 
-<a haref='https://spiffy-croissant-1a7315.netlify.app/'>Link<a>
+
+## Hosting:
+Hosted at -> [Link](https://spiffy-croissant-1a7315.netlify.app).
+
 
 ## Technologies envolved in this project:
-[![My Skills](https://skillicons.dev/icons?i=js,html,css,react,styledcomponents)](https://skillicons.dev)
+[![My Skills](https://skillicons.dev/icons?i=js,html,css,react,styledcomponents,firebase,netlify)](https://skillicons.dev)
 
-## Developed skills: 
-### In this project, i had the chance to expand my front-end knowledge. Now, i am able to use and understand:
+## Developed Skills: 
+### In this project, I had the chance to expand my front-end knowledge. Now, i am able to use and understand:
 
-### * ReactJS hooks; 
-### - functional react components; 
-### -> async programmin;
-### -> firebase auth and firebase storage;
-### -> scss;
-### -> rest apis;
-### -> styled components, and more.
+* ReactJS hooks; 
+* Functional react components; 
+* Async programmin;
+* Firebase auth and firebase storage;
+* Scss;
+* Rest apis;
+* Routes;
+* Styled components, and more.
+
+# Linkedin
+[Link](https://www.linkedin.com/in/victor-oliveira-3424101a7/).
 
 # Getting Started with Create React App
 
