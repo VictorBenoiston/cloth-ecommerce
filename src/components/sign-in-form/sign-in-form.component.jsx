@@ -17,9 +17,6 @@ const SignInForm = () => {
     const [formFields, setFormFields] = useState(defaultFormFields);
     const { email, password } = formFields;
 
-    // Getting the setter function from the element UserContext 
-    // const { setCurrentUser } = useContext(UserContext)
-
 
 
     const handleSubmit = async (event) => {
