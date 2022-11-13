@@ -2,32 +2,27 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom'
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react'
 
+import { store, persistor } from './store/store';
 import App from './App';
-import { UserProvider } from './context/user.context';
-import { CategoriesProvider } from './context/categories.context';
-import { CartProvider } from './context/cart.context';
 
 import './index.scss';
-
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <UserProvider>      {/* Everything inside the userProvider has access to the user. */}
-        <CategoriesProvider> {/* Everything inside the ProductProvider has access to the Products. */}
-          <CartProvider>  {/* Everything inside the CartProvider has access to the Cart. */}
-            <App />
-          </CartProvider>
-        </CategoriesProvider>
-      </UserProvider>
-    </BrowserRouter>
+    <Provider store={store}>
+      <PersistGate persistor={persistor}>  {/*Wrap the whole app with the persisterGate*/}
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </PersistGate>
+    </Provider>
   </React.StrictMode>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+
 reportWebVitals();

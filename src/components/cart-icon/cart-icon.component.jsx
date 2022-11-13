@@ -1,21 +1,27 @@
-import { useContext } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
-import { CartContext } from '../../context/cart.context'
+import { selectCartCount, selectIsCartOpen } from '../../store/cart/cart.selector'
+import { setIsCartOpen } from '../../store/cart/cart.action'
 
 import { ShoppingSvg, CartIconContainer, ItemCount } from './cart-icon.styles'
 
-const CartIcon = (() => {
-    const { isCartOpen, setIsCartOpen, itemsCounter } = useContext(CartContext) //
+const CartIcon = () => {
 
-    // It will invert the current value of isCartOpen
-    const toggleIsCartOpen = () => setIsCartOpen(!isCartOpen)
+    const dispatch = useDispatch();
+
+    const isCartOpen = useSelector(selectIsCartOpen);
+    const cartCount = useSelector(selectCartCount);
+
+
+    const toggleIsCartOpen = () => dispatch(setIsCartOpen(!isCartOpen));
+
 
     return (
-        <CartIconContainer>
-            <ShoppingSvg onClick={toggleIsCartOpen}/>
-            <ItemCount>{itemsCounter}</ItemCount> 
+        <CartIconContainer onClick={toggleIsCartOpen}>
+            <ShoppingSvg/>
+            <ItemCount>{cartCount}</ItemCount> 
         </CartIconContainer>
     )
-})
+}
 
 export default CartIcon;
