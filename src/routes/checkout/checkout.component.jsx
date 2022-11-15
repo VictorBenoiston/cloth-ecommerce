@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import { selectCartItems, selectCartTotal } from '../../store/cart/cart.selector';
 import CheckoutItem from '../../components/checkout-item/checkout-item.component.jsx';
+import Spinner from '../../components/spinner/spinner.component';
 
 import './checkout.styles.scss'
 
