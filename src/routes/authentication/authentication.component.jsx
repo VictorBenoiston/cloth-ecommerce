@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import { getRedirectResult } from 'firebase/auth'
 
 import './authentication.styles.scss'
 import SignUpForm from '../../components/sign-up-form/sign-up-form.component'
@@ -8,31 +7,6 @@ import SignInForm from '../../components/sign-in-form/sign-in-form.component'
 
 
 const Authentication = () => {
-
-    // Using the redirect, we need to use a useEffect, to every time we login again, we trigger the function.
-    // useEffect(() => {
-    //     const asFn = async () => { // We need to create a function, bc the useEffect cant be async.
-    //         const response = await getRedirectResult(auth);
-    //         console.log(response)
-    //         if (response) { // If there is a repsonse, i.e, its not null.
-    //             const { user } = response
-    //             const userDocRef = await createUserDocumentFromAuth(user)
-    //             setName(`, ${user.displayName}`)
-    //         }
-
-    //     }
-    //     asFn()
-    // }, []) // Empty array indicates that it'll run only when loading the page.)
-
-    // Logging with the google popUp
-
-    // const logGoogleUser = async () => {
-    //     const { user } = await signInWithGooglePopup()
-    //     const { displayName, uid } = user
-    //     setName(`, ${displayName}!`)
-    //     setAccessToken(`Your unique id is: ${uid}`)
-    //     const userDocRef = await createUserDocumentFromAuth(user)
-    // }
 
     const defaultFormFields = {
         email: '',

@@ -1,11 +1,11 @@
 import { Outlet, Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { ReactComponent as CrwnLogo } from '../../assets/crown.svg'
 import { selectIsCartOpen } from '../../store/cart/cart.selector'
 import { selectCurrentUser } from '../../store/user/user.selector'
-import { signOutUser } from '../../utils/firebase/firebase.utils'
 import CartIcon from '../../components/cart-icon/cart-icon.component'
 import CartDropdown from '../../components/cart-dropdown/cart-dropdown.component'
+import { signOutStart } from '../../store/user/user.action'
 
 import { NavigationContainer, NavLinks, NavLink, LogoContainer } from  './navigation.styles.jsx'
 
@@ -13,18 +13,13 @@ import { NavigationContainer, NavLinks, NavLink, LogoContainer } from  './naviga
 const Navigation = () => {
     const currentUser = useSelector(selectCurrentUser);
     const isCartOpen = useSelector(selectIsCartOpen);
+    const dispatch = useDispatch();
 
-    // const signOutHandler = async () => {
-    //     // Once you log out, the user is re-set to null.
-    //     await signOutUser()
-    //     setCurrentUser(null)
-    //     console.log(currentUser)
-    //     console.log('Logged out')
-    // }
+    const signOutUser = () => dispatch(signOutStart());
 
     return (
         <>
-            <NavigationContainer>
+            <NavigationContainer> 
                 <LogoContainer to='/'>
                     <CrwnLogo className='logo' />
                 </LogoContainer>
@@ -35,7 +30,6 @@ const Navigation = () => {
                     <NavLink to='/checkout'>
                         Checkout
                     </NavLink>
-
                     {
                         currentUser ? (
                             <NavLink as='span' onClick={signOutUser}>Sign Out</NavLink>)
