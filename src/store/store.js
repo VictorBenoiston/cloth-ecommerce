@@ -3,7 +3,9 @@ import { compose, createStore, applyMiddleware } from "redux";
 import logger from "redux-logger";
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
-import thunk from "redux-thunk";
+import createSagaMiddleware from "redux-saga";
+
+import { rootSaga } from "./root-saga";
 
 
 
@@ -19,12 +21,14 @@ const persistConfig = {
     // blacklist: ['user'],
     whitelist: ['cart']
 };
+
+const sagaMiddleware = createSagaMiddleware();
  
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 // In this case, we will only log the logger, while we are in development mode.
 // When we are in production mode, the stirng should be 'production'
-const middleWares = [process.env.NODE_ENV != 'production' && logger, thunk].filter(
+const middleWares = [process.env.NODE_ENV != 'production' && logger, sagaMiddleware].filter(
     Boolean
 );
 
@@ -38,6 +42,8 @@ const composeEnhancer =
 const composedEnhancers = composeEnhancer(applyMiddleware(...middleWares));
 
 export const store = createStore(persistedReducer, undefined, composedEnhancers);
+
+sagaMiddleware.run(rootSaga);
 
 
 export const persistor = persistStore(store);

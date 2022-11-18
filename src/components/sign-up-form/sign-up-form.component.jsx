@@ -1,14 +1,14 @@
-import { useActionData } from 'react-router-dom'
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+
 import {
     createAuthUserWithEmailAndPassword,
     createUserDocumentFromAuth,
-    signInWithGoogleRedirect,
-    signInWithGooglePopup
 } from '../../utils/firebase/firebase.utils'
 import FormInput from '../form-input/form-input.component'
-import Button, {BUTTON_TYPE_CLASSES} from '../button/Button.component'
+import Button, { BUTTON_TYPE_CLASSES } from '../button/Button.component'
 import './sign-up-form.styles.scss'
+import { signUpStart } from '../../store/user/user.action'
 
 const defaultFormFields = {
     displayName: '',
@@ -20,33 +20,26 @@ const defaultFormFields = {
 const SignUpForm = () => {
     const [formFields, setFormFields] = useState(defaultFormFields);
     const { displayName, email, password, confirmPassword } = formFields;
+    const dispatch = useDispatch();
 
 
-    // console.log(formFields)
+    const resetFormFields = () => {
+        setFormFields(defaultFormFields)
+    }
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
-        // A reset function for all the fields after creating user.
-        const resetFormFields = () => {
-            setFormFields(defaultFormFields)
-        }
 
         if (password != confirmPassword) {
             alert('Passwords do not match!')
             return;
         }
+
         try {
-            const { user } = await createAuthUserWithEmailAndPassword(
-                formFields
-            );
-
-
+            dispatch(signUpStart(email, password, displayName));
             resetFormFields()
             alert(`Succesfully created! Welcome, ${displayName}`)
 
-
-            await createUserDocumentFromAuth(user, { displayName })
         } catch (error) {
             if (error.code === 'auth/email-already-in-use') {
                 alert('Cannot create user, email already in use!')

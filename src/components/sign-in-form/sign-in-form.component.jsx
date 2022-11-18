@@ -1,12 +1,10 @@
 // import { useActionData } from 'react-router-dom'
 import { useState } from 'react'
-import {
-    signInWithGooglePopup,
-    signInAuthUserWithEmailAndPassword
-} from '../../utils/firebase/firebase.utils'
+import { useDispatch } from 'react-redux'
 import FormInput from '../form-input/form-input.component'
-import Button, {BUTTON_TYPE_CLASSES} from '../button/Button.component'
+import Button, { BUTTON_TYPE_CLASSES } from '../button/Button.component'
 import './sign-in-form.styles.scss'
+import { googleSignInStart, emailSignInStart } from '../../store/user/user.action'
 
 const defaultFormFields = {
     email: '',
@@ -16,50 +14,22 @@ const defaultFormFields = {
 const SignInForm = () => {
     const [formFields, setFormFields] = useState(defaultFormFields);
     const { email, password } = formFields;
+    const dispatch = useDispatch();
 
+    const resetFormFields = () => {
+        setFormFields(defaultFormFields)
+    }
 
+    const signInWithGoogle = async () => {
+        dispatch(googleSignInStart());
+    };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
-        // A reset function for all the fields after creating user.
-        const resetFormFields = () => {
-            setFormFields(defaultFormFields)
-        }
-
         try {
-            await signInAuthUserWithEmailAndPassword(formFields)
+            dispatch(emailSignInStart(email, password))
             console.log('logged in')
             resetFormFields()
-
-        } catch (error) {
-            switch (error.code) {
-                case 'auth/user-not-found':
-                    alert('User not found!')
-                    break;
-                case 'auth/wrong-password':
-                    alert('Wrong password!')
-                    break;
-                default:
-                    console.log(error)
-
-
-
-            }
-        }
-
-    }
-
-    // Logging with the google popUp
-
-    const signInWithGoogle = async () => {
-        await signInWithGooglePopup()
-        // const { displayName, uid } = user
-        // setName(`, ${displayName}!`)
-        // setAccessToken(`Your unique id is: ${uid}`)
-        try {
-            await signInAuthUserWithEmailAndPassword(formFields)
-            console.log('logged in')
 
         } catch (error) {
             switch (error.code) {
@@ -77,7 +47,7 @@ const SignInForm = () => {
     }
 
     const handleChange = (event) => {
-        const { name, value } = event.target
+        const { name, value } = event.target;
 
 
         setFormFields({ ...formFields, [name]: value }) /*  The name will be set by the name tag on each input
@@ -107,7 +77,7 @@ const SignInForm = () => {
 
                 <div className='buttons-container'>
                     <Button type='submit'>Sign in</Button >
-                    <Button buttonType={BUTTON_TYPE_CLASSES.google} type='button' 
+                    <Button buttonType={BUTTON_TYPE_CLASSES.google} type='button'
                         onClick={signInWithGoogle}>
                         <img src="https://www.pngall.com/wp-content/uploads/5/Google-G-Logo.png" alt="" />
                         Sign in with Google

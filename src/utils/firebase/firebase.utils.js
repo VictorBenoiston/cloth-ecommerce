@@ -107,22 +107,19 @@ export const createUserDocumentFromAuth = async (userAuth, additionalInformation
         }
     }
 
-    return userDocRef;
+    return userSnapshot;
 }
 
 
 // Creating an user with email and pass
-export const createAuthUserWithEmailAndPassword = async (formFields) => {
-    const {email, password, displayName} = formFields
+export const createAuthUserWithEmailAndPassword = async (email, password) => {
     if (!email || !password) return;
-    
     return createUserWithEmailAndPassword(auth, email, password)
 
 }
 
 // Logging an user with email and pass
-export const signInAuthUserWithEmailAndPassword = async (formFields) => {
-    const {email, password} = formFields
+export const signInAuthUserWithEmailAndPassword = async (email, password) => {
     if (!email || !password) return;
     return signInWithEmailAndPassword(auth, email, password)
 }
@@ -135,8 +132,15 @@ export const signOutUser = async () => await signOut(auth)
 export const onAuthStateChangedListener = (callback) => 
     onAuthStateChanged(auth, callback, );
 
-/*
-next: callback,
-error: errorCallback,
-complete: completedCallback
-*/
+export const getCurrentUser = () => {
+     return new Promise((resolve, reject) => {
+        const unsubscribe = onAuthStateChanged(
+            auth,
+            (userAuth) => {
+                unsubscribe();
+                resolve(userAuth);
+            },
+            reject
+        );
+     });
+};
