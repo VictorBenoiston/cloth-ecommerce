@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 import './authentication.styles.scss'
 import SignUpForm from '../../components/sign-up-form/sign-up-form.component'

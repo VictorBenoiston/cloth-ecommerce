@@ -1,4 +1,4 @@
-import { Outlet, Link } from 'react-router-dom'
+import { Outlet } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { ReactComponent as CrwnLogo } from '../../assets/crown.svg'
 import { selectIsCartOpen } from '../../store/cart/cart.selector'

@@ -1,7 +1,9 @@
 import { useSelector } from 'react-redux';
 import { selectCartItems, selectCartTotal } from '../../store/cart/cart.selector';
 import CheckoutItem from '../../components/checkout-item/checkout-item.component.jsx';
-import Spinner from '../../components/spinner/spinner.component';
+// import Spinner from '../../components/spinner/spinner.component';
+import PaymentForm from '../../components/payment-form/payment-form.component';
+import EmptyCheckout from '../../components/empty-checkout/empty-checkout.component';
 
 import './checkout.styles.scss'
 
@@ -35,13 +37,15 @@ const Checkout = () => {
                 </div>
 
             </div>
-                {cartItems.map((cartItem) => {
+                {cartItems.length ? cartItems.map((cartItem) => {
 
                     return (
                         <CheckoutItem key={cartItem.id} cartItem={cartItem}/>
                     )
-                })}
+                })  
+                : <EmptyCheckout />}
             <span className='total'>Total: {cartTotal} $</span>
+            <PaymentForm />
         </div>
     )
 }
