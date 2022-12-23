@@ -8,6 +8,7 @@ import CartDropdown from '../../components/cart-dropdown/cart-dropdown.component
 import { signOutStart } from '../../store/user/user.action'
 
 import { NavigationContainer, NavLinks, NavLink, LogoContainer } from  './navigation.styles.jsx'
+import { setIsCartOpen } from '../../store/cart/cart.action'
 
 
 const Navigation = () => {
@@ -15,38 +16,39 @@ const Navigation = () => {
     const isCartOpen = useSelector(selectIsCartOpen);
     const dispatch = useDispatch();
 
+    const handleSwitchingPages = () => dispatch(setIsCartOpen(false))
+
     const signOutUser = () => dispatch(signOutStart());
 
     return (
         <>
             <NavigationContainer> 
                 <LogoContainer to='/'>
-                    <CrwnLogo className='logo' />
+                    <CrwnLogo className='logo' onClick={handleSwitchingPages}/>
                 </LogoContainer>
                 <NavLinks>
                     <NavLink to='/shop'>
                         Shop
                     </NavLink>
-                    <NavLink to='/checkout'>
+                    <NavLink to='/checkout' onClick={handleSwitchingPages}>
                         Checkout
                     </NavLink>
                     {
                         currentUser ? (
                             <NavLink as='span' onClick={signOutUser}>Sign Out</NavLink>)
-                            : (<NavLink to='/auth' >
+                            : (<NavLink to='/auth' onClick={handleSwitchingPages}>
                                 Sign in
                             </NavLink>)
                     }
                     <CartIcon className='nav-link' />
-
                 </NavLinks>
                 
                 
                 {/* {isCartOpen? <CartDropdown/>
                 : null} */}
 
-                {isCartOpen && <CartDropdown/>} {/* True && True. If both are true, its going to return
-                                                    the last parameter (CartDropdown)  */}
+                {isCartOpen && <CartDropdown/>} 
+
             </NavigationContainer>
 
             <Outlet />

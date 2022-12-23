@@ -34,15 +34,6 @@ export const GoogleSignInButton = styled(BaseButton)`
 background-color: #4285f4;
 color: white;
 align-items: center;
-padding: 0 10px 0 20px;
-
-img {
-  margin: 0px 10px 0px -15px;
-  width: 45px;
-  height: 45px;
-  display: flex;
-}
-
 
   &:hover {
     background-color: #357ae8;

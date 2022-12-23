@@ -79,7 +79,6 @@ const SignInForm = () => {
                     <Button type='submit'>Sign in</Button >
                     <Button buttonType={BUTTON_TYPE_CLASSES.google} type='button'
                         onClick={signInWithGoogle}>
-                        <img src="https://www.pngall.com/wp-content/uploads/5/Google-G-Logo.png" alt="" />
                         Sign in with Google
                     </Button>
                 </div>
