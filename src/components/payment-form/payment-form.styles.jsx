@@ -6,7 +6,7 @@ height: 300px;
 display: flex;
 flex-direction: column;
 align-items: center;
-justifuy-content: center;
+justify-content: center;
 `
 
 export const FormContainer = styled.form`
